@@ -13,10 +13,16 @@ const ProfileScreen = ({ location, history }) => {
   const [message, setMessage] = useState("")
 
   const dispatch = useDispatch()
+
   const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
+  const { success } = userUpdateProfile
+
   const redirect = location.search ? location.search.split("=")[1] : "/"
 
   useEffect(() => {
@@ -47,6 +53,8 @@ const ProfileScreen = ({ location, history }) => {
         <h2>Sign Up</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
+        {success && <Message variant="success">Profile Updated</Message>}
+
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
