@@ -9,6 +9,7 @@ import Homescreen from "./screens/Homescreen"
 import LoginScreen from "./screens/LoginScreen.js"
 import RegisterScreen from "./screens/RegisterScreen.jsx"
 import ProfileScreen from "./screens/ProfileScreen.js"
+import ShippingScreen from "./screens/ShippingScreen.jsx"
 
 const App = () => {
   return (
