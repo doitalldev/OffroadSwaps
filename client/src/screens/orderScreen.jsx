@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Message from "../components/Message.js"
 import Loader from "../components/Loader.js"
 import { Link } from "react-router-dom"
-import { getOorderDetails } from "../actions/orderActions.js"
+import { getOrderDetails } from "../actions/orderActions.js"
 
 const OrderScreen = ({ match }) => {
   const orderId = match.params.id
@@ -13,8 +13,19 @@ const OrderScreen = ({ match }) => {
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
 
+  if (!loading) {
+    const addDecimals = (num) => {
+      return (Math.round(num * 100) / 100).toFixed(2)
+    }
+
+    //Calc prices
+    order.itemsPrice = addDecimals(
+      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+    )
+  }
+
   useEffect(() => {
-    dispatch(getOorderDetails(orderId))
+    dispatch(getOrderDetails(orderId))
   }, [dispatch])
 
   return loading ? (
@@ -29,6 +40,12 @@ const OrderScreen = ({ match }) => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
+              <p>
+                <strong>Name:</strong> {order.user.name}
+              </p>
+              <p>
+                <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+              </p>
               <p>
                 <strong>Address:</strong>
                 {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
