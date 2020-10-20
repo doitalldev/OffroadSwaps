@@ -11,6 +11,7 @@ import RegisterScreen from "./screens/RegisterScreen.jsx"
 import ProfileScreen from "./screens/ProfileScreen.js"
 import ShippingScreen from "./screens/ShippingScreen.jsx"
 import PaymentScreen from "./screens/PaymentScreen.jsx"
+import PlaceOrderScreen from "./screens/PlaceOrderScreen.jsx"
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Header />
       <main className="py-3">
         <Container>
+          <Route path="/placeorder" component={PlaceOrderScreen} />
           <Route path="/payment" component={PaymentScreen} />
           <Route path="/shipping" component={ShippingScreen} />
           <Route path="/profile" component={ProfileScreen} />
